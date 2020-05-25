@@ -55,22 +55,25 @@ export default {
         }
     },
     mounted() {
-      if (messages[this.$route.query.message]) {
-        this.$message(messages[this.$route.query.message])
-      }
+        if (messages[this.$route.query.message]) {
+            this.$message(messages[this.$route.query.message])
+        }
     },
     methods: {
-        submitHandler() {
+        async submitHandler() {
             if (this.$v.$invalid) {
                 this.$v.$touch()
                 return
             }
             const formData = {
-              email: this.email,
-              password: this.password
+                email: this.email,
+                password: this.password
             }
-            console.log(formData)
+            try{
+              await this.$store.dispatch('login', formData)
             this.$router.push('/')
+            } catch (e) {}
+            
         }
     }
 }
