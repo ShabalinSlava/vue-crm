@@ -1,6 +1,6 @@
 <template>
 <div>
-  <Loader v-if='loading' />
+    <Loader v-if='loading' />
     <div class="app-main-layout" v-else>
         <Navbar @click='isOpen = !isOpen' />
         <Sidebar v-model='isOpen' />
@@ -21,6 +21,7 @@
 <script>
 import Navbar from '@/components/app/Navbar';
 import Sidebar from '@/components/app/Sidebar';
+import messages from '@/utils/messages';
 export default {
     name: 'main-layout',
     data: () => ({
@@ -36,6 +37,16 @@ export default {
     components: {
         Navbar,
         Sidebar
+    },
+    computed: {
+        error() {
+            return this.$store.getters.error
+        }
+    },
+    watch: {
+        error(fbError) {
+            this.$error(messages[fbError.code] || 'Что-то пошло не так')
+        }
     }
 }
 </script>
