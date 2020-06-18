@@ -34,8 +34,14 @@ import {
 } from 'vuex';
 import {
     required,
-} from 'vuelidate/lib/validators'; 
+} from 'vuelidate/lib/validators';
+import localeFilter from '@/filters/localize.filter'
 export default {
+    metaInfo() {
+    return {
+      title: this.$title('ProfileTitle')
+    }
+  },
     data: () => ({
         name: '',
         isRuLocale: true
@@ -50,7 +56,7 @@ export default {
         this.isRuLocale = this.info.locale === 'ru-RU'
         setTimeout(() => {
             window.M.updateTextFields()
-        },0)
+        }, 0)
 
     },
     computed: {

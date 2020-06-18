@@ -1,14 +1,14 @@
 <template>
 <div>
     <div class="page-title">
-        <h3>Категории</h3>
+        <h3>{{'Categories'|localize}}</h3>
     </div>
     <section>
       <Loader v-if='loading' />
         <div class="row" v-else>
             <CategoryCreate @created='addNewCategory' />
             <CategoryEdit :categories='categories' @updated='updateCategories' :key='categories.length + updateCount' v-if='categories.length' />
-            <p v-else class='center'>Категорий пока нет</p>
+            <p v-else class='center'>{{'NoCategories'|localize}}</p>
         </div>
     </section>
 </div>
@@ -19,6 +19,11 @@ import CategoryCreate from '@/components/CategoryCreate'
 import CategoryEdit from '@/components/CategoryEdit'
 export default {
     name: 'categories',
+    metaInfo() {
+    return {
+      title: this.$title('Menu_Categories')
+    }
+  },
     data: () => ({
       categories: [],
       loading: true,
