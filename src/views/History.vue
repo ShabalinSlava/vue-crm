@@ -52,12 +52,12 @@ export default {
                 datasets: [{
                     label: 'Расходы по категориям',
                     data: categories.map(c => {
-                      return this.records.reduce((total, r) => {
-                        if (r.categoryId === c.id && r.type === 'outcome') {
-                          total += +r.amount
-                        }
-                        return total
-                      },0)
+                        return this.records.reduce((total, r) => {
+                            if (r.categoryId === c.id && r.type === 'outcome') {
+                                total += +r.amount
+                            }
+                            return total
+                        }, 0)
                     }),
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
